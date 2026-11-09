@@ -46,8 +46,9 @@ export function MaterialForm({ mode, action, categories, defaults }: Props) {
       const transfer = new DataTransfer();
       transfer.items.add(new File([blob], "miniatura.jpg", { type: "image/jpeg" }));
       thumbnail.files = transfer.files;
-    } catch {
+    } catch (error) {
       // Without a preview the material still uploads; the listing shows a placeholder
+      console.warn("No se pudo generar la miniatura del PDF:", error);
     }
   }
 
