@@ -11,6 +11,9 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3001",
+    // Production domains that serve the app (the same deployment is reachable from both)
+    "https://escuela-biblica-taberilopango.vercel.app",
+    "https://escuelabiclica-recursos.vercel.app",
     ...(env.BETTER_AUTH_URL ? [env.BETTER_AUTH_URL] : []),
   ],
   database: prismaAdapter(db, {
