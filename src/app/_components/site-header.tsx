@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { getSession } from "~/server/better-auth/server";
 
+import { BrandLogo } from "./brand-logo";
 import { SignOutButton } from "./sign-out-button";
 
 export async function SiteHeader() {
@@ -10,48 +10,47 @@ export async function SiteHeader() {
   const isAdmin = session?.user.role === "admin";
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 border-b-4 border-brand bg-white px-4 py-3">
-      <Link href="/" className="flex items-center gap-3">
-        <Image
-          src="/brand/logo-primary.jpg"
-          alt="Tabernáculo de Ilopango"
-          width={1020}
-          height={336}
-          priority
-          className="h-12 w-auto"
-        />
-        <span className="hidden text-lg font-bold text-brand-dark sm:inline">
-          Escuela Bíblica
-        </span>
-      </Link>
+    <header className="bg-leaf text-white">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-4 px-4 py-6">
+        <Link href="/" className="text-2xl sm:text-3xl">
+          <BrandLogo />
+        </Link>
 
-      <nav className="flex flex-wrap items-center gap-3 text-sm">
-        {session && (
-          <Link
-            href="/materiales/nuevo"
-            className="rounded bg-brand px-3 py-1 font-semibold text-white"
-          >
-            Subir material
-          </Link>
-        )}
-        {session && (
-          <Link href="/categorias" className="underline">
-            Categorías
-          </Link>
-        )}
-        {isAdmin && (
-          <Link href="/admin/usuarios" className="underline">
-            Editores
-          </Link>
-        )}
-        {session ? (
-          <SignOutButton />
-        ) : (
-          <Link href="/login" className="underline">
-            Iniciar sesión
-          </Link>
-        )}
-      </nav>
+        <div className="flex flex-col items-end gap-3">
+          <p className="hidden text-right text-lg leading-tight font-medium uppercase sm:block">
+            “Un trazo
+            <br />
+            inspirado por Dios”
+          </p>
+          <nav className="flex flex-wrap items-center justify-end gap-3 text-sm">
+            {session && (
+              <Link
+                href="/materiales/nuevo"
+                className="rounded-full bg-white px-3 py-1 font-semibold text-brand"
+              >
+                Subir material
+              </Link>
+            )}
+            {session && (
+              <Link href="/categorias" className="underline">
+                Categorías
+              </Link>
+            )}
+            {isAdmin && (
+              <Link href="/admin/usuarios" className="underline">
+                Editores
+              </Link>
+            )}
+            {session ? (
+              <SignOutButton />
+            ) : (
+              <Link href="/login" className="text-white/80 underline">
+                Iniciar sesión
+              </Link>
+            )}
+          </nav>
+        </div>
+      </div>
     </header>
   );
 }

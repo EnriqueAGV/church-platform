@@ -20,7 +20,7 @@ export function SignOutButton() {
         router.push("/login");
         router.refresh();
       }}
-      className="rounded border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100"
+      className="rounded-full border border-white/60 px-3 py-1 text-sm hover:bg-white/10"
     >
       Cerrar sesión
     </button>

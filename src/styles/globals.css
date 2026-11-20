@@ -4,8 +4,17 @@
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  /* Tabernáculo de Ilopango brand (taken from taberilopango.net) */
-  --color-brand: #be1e2d;
-  --color-brand-dark: #1c2b39;
-  --color-cream: #faf8f5;
+  /* Academia Tabnít brand (sampled from the brand mockup) */
+  --color-brand: #3a5400;
+  --color-brand-dark: #2b3f00;
+  --color-ink: #333331;
+  --color-cream: #fbfcf8;
+}
+
+/* Green leaf texture used on the header and section bands */
+@utility bg-leaf {
+  background-color: var(--color-brand);
+  background-image: url("/brand/leaf.webp");
+  background-size: cover;
+  background-position: center;
 }

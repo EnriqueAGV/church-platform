@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { BrandLogo } from "~/app/_components/brand-logo";
 import { authClient } from "~/server/better-auth/client";
 
 export default function LoginPage() {
@@ -33,15 +33,11 @@ export default function LoginPage() {
     <main className="flex min-h-screen items-center justify-center bg-cream px-4">
       <form
         action={onSubmit}
-        className="flex w-full max-w-sm flex-col gap-4 rounded-xl bg-white p-8 shadow"
+        className="flex w-full max-w-sm flex-col gap-4 overflow-hidden rounded-xl bg-white p-8 shadow"
       >
-        <Image
-          src="/brand/logo-primary.jpg"
-          alt="Tabernáculo de Ilopango"
-          width={1020}
-          height={336}
-          className="mx-auto h-auto w-56"
-        />
+        <div className="bg-leaf -mx-8 -mt-8 flex justify-center rounded-t-xl py-6 text-2xl">
+          <BrandLogo />
+        </div>
         <h1 className="text-center text-2xl font-bold text-brand-dark">
           Iniciar sesión
         </h1>

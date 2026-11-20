@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AboutSection, SiteFooter } from "~/app/_components/site-footer";
 import { SiteHeader } from "~/app/_components/site-header";
 import {
   FORMAT_LABELS,
@@ -62,65 +63,10 @@ export default async function Home({
   return (
     <>
       <SiteHeader />
-      <main className="min-h-screen bg-cream px-4 py-8">
+      <AboutSection />
+      <main className="bg-cream px-4 py-8">
         <div className="mx-auto flex max-w-5xl flex-col gap-6">
-          <form
-            action="/"
-            method="get"
-            role="search"
-            className="flex flex-wrap gap-2 text-sm"
-          >
-            {categoria && <input type="hidden" name="categoria" value={categoria} />}
-            <input
-              type="search"
-              name="q"
-              defaultValue={query}
-              placeholder="Buscar materiales…"
-              aria-label="Buscar materiales"
-              className="min-w-0 flex-1 basis-56 rounded-full bg-white px-4 py-2 shadow outline-none focus:ring-2 focus:ring-brand"
-            />
-            <select
-              name="formato"
-              defaultValue={formato ?? ""}
-              aria-label="Formato"
-              className="rounded-full bg-white px-3 py-2 shadow"
-            >
-              <option value="">Todos los formatos</option>
-              {MATERIAL_FORMAT_VALUES.map((value) => (
-                <option key={value} value={value}>
-                  {FORMAT_LABELS[value]}
-                </option>
-              ))}
-            </select>
-            <select
-              name="orden"
-              defaultValue={orden ?? "recientes"}
-              aria-label="Ordenar por"
-              className="rounded-full bg-white px-3 py-2 shadow"
-            >
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <button
-              type="submit"
-              className="rounded-full bg-brand px-4 py-2 font-semibold text-white"
-            >
-              Buscar
-            </button>
-            {(Boolean(query) || Boolean(formato) || Boolean(orden)) && (
-              <Link
-                href={filterHref({ categoria })}
-                className="self-center text-neutral-600 underline"
-              >
-                Limpiar
-              </Link>
-            )}
-          </form>
-
-          <nav className="flex flex-wrap gap-2 text-sm">
+          <nav className="flex flex-wrap justify-center gap-2 text-sm">
             <FilterLink
               href={filterHref({ ...filters, categoria: undefined })}
               active={!categoria}
@@ -135,6 +81,67 @@ export default async function Home({
               />
             ))}
           </nav>
+
+          <form
+            action="/"
+            method="get"
+            role="search"
+            className="flex flex-wrap gap-2 text-sm"
+          >
+            {categoria && <input type="hidden" name="categoria" value={categoria} />}
+            <input
+              type="search"
+              name="q"
+              defaultValue={query}
+              placeholder="Buscar materiales…"
+              aria-label="Buscar materiales"
+              className="min-w-0 flex-1 basis-56 rounded-full border border-ink bg-white px-4 py-2 outline-none focus:ring-2 focus:ring-brand"
+            />
+            <select
+              name="formato"
+              defaultValue={formato ?? ""}
+              aria-label="Formato"
+              className="rounded-full border border-ink bg-white px-3 py-2"
+            >
+              <option value="">Todos los formatos</option>
+              {MATERIAL_FORMAT_VALUES.map((value) => (
+                <option key={value} value={value}>
+                  {FORMAT_LABELS[value]}
+                </option>
+              ))}
+            </select>
+            <select
+              name="orden"
+              defaultValue={orden ?? "recientes"}
+              aria-label="Ordenar por"
+              className="rounded-full border border-ink bg-white px-3 py-2"
+            >
+              {SORT_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="submit"
+              aria-label="Buscar"
+              className="flex size-10 items-center justify-center rounded-full border border-ink bg-white text-ink hover:bg-brand hover:text-white"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-5">
+                <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+                <path d="m20 20-4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+            {(Boolean(query) || Boolean(formato) || Boolean(orden)) && (
+              <Link
+                href={filterHref({ categoria })}
+                className="self-center text-neutral-600 underline"
+              >
+                Limpiar
+              </Link>
+            )}
+          </form>
+
 
           {materials.length === 0 ? (
             <p className="text-neutral-600">
@@ -187,6 +194,7 @@ export default async function Home({
           )}
         </div>
       </main>
+      <SiteFooter />
     </>
   );
 }
@@ -232,10 +240,10 @@ function FilterLink({
   return (
     <Link
       href={href}
-      className={`rounded-full px-3 py-1 ${
+      className={`rounded-full px-4 py-1.5 font-semibold uppercase ${
         active
-          ? "bg-brand text-white"
-          : "bg-white text-neutral-700 shadow hover:bg-neutral-100"
+          ? "bg-white text-brand ring-2 ring-brand ring-inset"
+          : "bg-brand text-white hover:bg-brand-dark"
       }`}
     >
       {label}
